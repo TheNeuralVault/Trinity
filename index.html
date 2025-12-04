@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>NEURAL MATRIX | The Singularity</title>
+    <title>NEURAL MATRIX | Sovereign Digital Territories</title>
     
     <!-- /// STRATEGIC ANALYTICS (G.A.4) /// -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NEURALMATRIX"></script>
@@ -21,16 +21,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-    <!-- /// THE SKIN (EMBEDDED) /// -->
+    <!-- /// THE HYPER-SKIN /// -->
     <style>
         :root {
             --neon-blue: #00f3ff;
             --neon-purple: #bc13fe;
-            --neon-red: #ff0055;
-            --gold: #ffaa00;
-            --void: #030303;
-            --glass: rgba(10, 10, 10, 0.7);
-            --border: 1px solid rgba(255, 255, 255, 0.1);
+            --neon-pink: #ff0055;
+            --gold: #ffd700;
+            --void: #020204;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.1);
             --font-display: 'Helvetica Neue', Arial, sans-serif;
             --font-tech: 'Courier New', monospace;
         }
@@ -50,36 +51,44 @@
         #canvas-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
+            z-index: -2;
         }
 
-        /* VIGNETTE OVERLAY (Focuses the eye) */
-        .vignette {
+        /* CINEMATIC SCANLINE OVERLAY */
+        .scanlines {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, #000 130%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
             pointer-events: none;
-            z-index: 0;
+            z-index: -1;
+            opacity: 0.3;
         }
 
-        /* HUD NAV */
+        /* HUD NAV - GLASS */
         .hud-nav {
             position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 20px 5%;
+            top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: linear-gradient(to bottom, #000, transparent);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: var(--glass-border);
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .brand { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; text-shadow: 0 0 10px var(--neon-blue); }
-        .pulse { color: var(--neon-blue); animation: blink 2s infinite; }
-        .status { font-family: var(--font-tech); font-size: 0.7rem; color: #888; }
+        .brand { font-weight: 800; letter-spacing: 2px; font-size: 1.1rem; color: #fff; }
+        .pulse { color: var(--neon-blue); animation: blink 2s infinite; text-shadow: 0 0 10px var(--neon-blue); }
+        .status { font-family: var(--font-tech); font-size: 0.7rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
 
         /* HERO SECTION */
         .hero {
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -90,106 +99,147 @@
             z-index: 10;
         }
 
-        .eyebrow { font-family: var(--font-tech); color: var(--neon-blue); letter-spacing: 2px; margin-bottom: 1rem; font-size: 0.8rem; }
+        .eyebrow { 
+            font-family: var(--font-tech); 
+            color: var(--neon-blue); 
+            letter-spacing: 4px; 
+            margin-bottom: 20px; 
+            font-size: 0.8rem; 
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+        }
         
         h1 {
-            font-size: clamp(3rem, 12vw, 8rem);
+            font-size: clamp(3.5rem, 12vw, 9rem);
             line-height: 0.9;
             text-transform: uppercase;
             font-weight: 900;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
             color: #fff;
-            text-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            letter-spacing: -3px;
+            /* Subtle Gradient Text */
+            background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(0,0,0,0.8));
         }
 
         .tagline {
-            color: #ddd;
+            color: rgba(255,255,255,0.8);
             max-width: 600px;
-            margin-bottom: 3rem;
+            margin-bottom: 50px;
             line-height: 1.6;
             font-size: 1.1rem;
-            text-shadow: 0 2px 5px #000;
-            background: rgba(0,0,0,0.5); /* Readable text bg */
-            padding: 10px;
-            border-radius: 4px;
+            font-weight: 300;
         }
 
+        /* LIQUID BUTTON */
         .cta-btn {
-            padding: 1.2rem 3rem;
-            background: rgba(0, 243, 255, 0.15);
-            border: 1px solid var(--neon-blue);
-            color: #fff;
+            position: relative;
+            padding: 20px 50px;
+            background: var(--neon-blue);
+            color: #000;
             text-transform: uppercase;
             letter-spacing: 3px;
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-            backdrop-filter: blur(5px);
+            font-weight: 900;
+            border-radius: 100px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+            overflow: hidden;
         }
-        .cta-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 50px var(--neon-blue); }
+        .cta-btn:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 60px rgba(0, 243, 255, 0.8);
+            background: #fff; 
+        }
 
         /* THE 7 PILLARS GRID */
         .pillars-section {
-            padding: 6rem 5%;
-            background: rgba(5, 5, 5, 0.85); /* Semi-transparent to see stars */
-            border-top: 1px solid #222;
+            padding: 100px 5%;
+            background: linear-gradient(to bottom, transparent, #000);
             z-index: 20;
             position: relative;
-            backdrop-filter: blur(10px);
         }
 
-        .section-header { margin-bottom: 4rem; text-align: center; }
+        .section-header { margin-bottom: 60px; text-align: center; }
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 8px;
             color: #fff;
-            margin-bottom: 1rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
+        /* HYPER-GLASS CARDS */
         .card {
-            background: rgba(20, 20, 20, 0.6); /* Glassmorphism */
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 3rem 2rem;
-            transition: all 0.4s ease;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* Card Hover Glow Effect */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
         .card:hover { 
-            background: rgba(30, 30, 30, 0.8); 
-            border-color: var(--neon-blue); 
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
+        .card:hover::before { opacity: 1; }
         
         .card-meta { 
             font-family: var(--font-tech); 
-            color: #555; 
-            font-size: 0.8rem; 
-            margin-bottom: 1rem; 
+            color: rgba(255,255,255,0.4); 
+            font-size: 0.7rem; 
+            margin-bottom: 20px; 
             display: flex; 
             justify-content: space-between;
+            letter-spacing: 2px;
         }
         
         .card h3 { 
-            font-size: 1.8rem; 
-            margin-bottom: 0.5rem; 
+            font-size: 2rem; 
+            margin-bottom: 15px; 
             color: #fff; 
             font-weight: 800; 
+            letter-spacing: -1px;
         }
         
-        .card p { color: #aaa; font-size: 0.9rem; line-height: 1.5; }
+        .card p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; }
 
-        /* CONTACT FORM */
+        /* Specific Glows */
+        .card.core:hover h3 { color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue); }
+        .card.flux:hover h3 { color: var(--neon-pink); text-shadow: 0 0 20px var(--neon-pink); }
+        .card.nexus:hover h3 { color: var(--neon-purple); text-shadow: 0 0 20px var(--neon-purple); }
+        .card.cipher:hover h3 { color: var(--gold); text-shadow: 0 0 20px var(--gold); }
+
+        /* CONTACT FORM - TERMINAL STYLE */
         .contact-section {
-            padding: 6rem 5%;
+            padding: 100px 5%;
             background: #000;
             border-top: 1px solid #222;
             z-index: 20;
@@ -201,64 +251,70 @@
 
         .form-box {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 20px;
         }
         
         input, select, textarea {
             width: 100%;
-            padding: 1.2rem;
-            background: #080808;
-            border: 1px solid #333;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-bottom: 1px solid #333;
             color: #fff;
             font-family: var(--font-tech);
             font-size: 1rem;
             outline: none;
-            transition: border 0.3s, box-shadow 0.3s;
-            border-radius: 0; 
+            transition: all 0.3s;
+            border-radius: 4px 4px 0 0;
         }
         
         input:focus, select:focus, textarea:focus { 
-            border-color: var(--neon-blue); 
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); 
+            background: rgba(255,255,255,0.1);
+            border-bottom-color: var(--neon-blue); 
         }
         
-        textarea { resize: vertical; min-height: 150px; }
+        textarea { resize: vertical; min-height: 200px; }
 
         .submit-btn {
             width: 100%;
-            padding: 1.5rem;
-            background: var(--neon-blue);
+            padding: 25px;
+            background: #fff;
             color: #000;
             border: none;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 20px;
         }
-        .submit-btn:hover { background: #fff; box-shadow: 0 0 30px #fff; }
+        .submit-btn:hover { background: var(--neon-blue); box-shadow: 0 0 40px var(--neon-blue); }
 
         footer {
             text-align: center;
-            padding: 3rem;
-            color: #444;
+            padding: 50px;
+            color: #555;
             font-family: var(--font-tech);
             font-size: 0.7rem;
-            background: #020202;
+            background: #000;
             border-top: 1px solid #111;
         }
+        
+        .legal-link { color: #444; text-decoration: none; margin-top: 10px; display: block; transition: color 0.3s; }
+        .legal-link:hover { color: var(--neon-blue); }
 
         @keyframes blink { 50% { opacity: 0; } }
 
         /* MOBILE FIXES */
         @media (max-width: 768px) {
-            h1 { font-size: 3.5rem; }
-            .hero { justify-content: center; min-height: 85vh; }
-            .card { padding: 2rem 1.5rem; }
+            .hud-nav { width: 95%; padding: 15px 20px; }
+            h1 { font-size: 4rem; }
+            .hero { justify-content: center; }
+            .card { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -266,7 +322,7 @@
 
     <!-- VISUAL ENGINE -->
     <div id="canvas-container"></div>
-    <div class="vignette"></div>
+    <div class="scanlines"></div>
 
     <!-- HUD -->
     <nav class="hud-nav">
@@ -277,12 +333,12 @@
     <!-- HERO -->
     <header class="hero">
         <p class="eyebrow">/// ARCHITECTURE CLASS-5 ///</p>
-        <h1>EMPIRE<br>BUILDER</h1>
+        <h1>DIGITAL<br>DESIRE</h1>
         <p class="tagline">
             We do not build websites. We construct Sovereign Digital Territories.<br>
             Massive Pillars. Algorithmic Perfection. The Singularity.
         </p>
-        <a href="#contact" class="cta-btn">INITIATE CUSTOM BUILD</a>
+        <a href="#contact" class="cta-btn">INITIATE PROTOCOL</a>
     </header>
 
     <!-- THE 7 PILLARS -->
@@ -371,16 +427,18 @@
     <footer>
         <p>SYSTEM OPTIMIZED FOR: MOBILE // TABLET // TV</p>
         <p style="margin-top:1rem;">&copy; 2025 NEURAL MATRIX VAULT. MASTER ARCHITECTURE.</p>
+        <a href="LEGAL_WARNING.md" class="legal-link">/// LEGAL PROTOCOLS ///</a>
     </footer>
 
     <!-- /// THE BRAIN: ALGORITHM (EMBEDDED) /// -->
     <script>
         // 1. SCENE SETUP
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x030303, 0.002); // Matches BG color
+        // Deep blue fog for that "underwater" cyber feel
+        scene.fog = new THREE.FogExp2(0x020204, 0.002);
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+        camera.position.z = 6;
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -388,19 +446,19 @@
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
         // 2. THE JEWEL (Main Icosahedron)
-        const geometry = new THREE.IcosahedronGeometry(1.4, 1);
+        const geometry = new THREE.IcosahedronGeometry(1.5, 1);
         const material = new THREE.MeshBasicMaterial({ 
             color: 0x00f3ff, 
             wireframe: true,
             transparent: true,
-            opacity: 0.5,
+            opacity: 0.35,
             side: THREE.DoubleSide
         });
         const jewel = new THREE.Mesh(geometry, material);
         scene.add(jewel);
 
         // 3. INNER CORE (The Intelligence)
-        const coreGeo = new THREE.IcosahedronGeometry(0.6, 0);
+        const coreGeo = new THREE.IcosahedronGeometry(0.7, 0);
         const coreMat = new THREE.MeshBasicMaterial({ 
             color: 0xffffff, 
             wireframe: true,
@@ -412,11 +470,11 @@
 
         // 4. STARFIELD (The Universe)
         const particlesGeo = new THREE.BufferGeometry();
-        const particlesCount = 1000;
+        const particlesCount = 1200;
         const posArray = new Float32Array(particlesCount * 3);
 
         for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 25; // Wide spread
+            posArray[i] = (Math.random() - 0.5) * 30; // Wide spread
         }
 
         particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -424,7 +482,7 @@
             size: 0.05,
             color: 0x00f3ff,
             transparent: true,
-            opacity: 0.6,
+            opacity: 0.5,
             blending: THREE.AdditiveBlending
         });
         const starMesh = new THREE.Points(particlesGeo, particlesMat);
@@ -455,15 +513,16 @@
             const elapsedTime = clock.getElapsedTime();
 
             // Rotate Jewel
-            jewel.rotation.y += 0.005;
-            jewel.rotation.x += 0.002;
+            jewel.rotation.y += 0.003;
+            jewel.rotation.x += 0.001;
             
-            // Mouse Influence (Smooth)
+            // Mouse Influence (Fluid)
             jewel.rotation.y += mouseX;
             jewel.rotation.x += mouseY;
 
-            // Breathing scale (The "Sexy" Pulse)
-            const scale = 1 + Math.sin(elapsedTime * 2) * 0.05;
+            // Breathing scale (Heartbeat)
+            // Complex sine wave for organic feel
+            const scale = 1 + Math.sin(elapsedTime * 1.5) * 0.03 + Math.sin(elapsedTime * 4) * 0.01;
             jewel.scale.set(scale, scale, scale);
 
             // Core Counter-Rotation
@@ -478,20 +537,42 @@
         }
         animate();
 
-        // 7. RESIZE HANDLER (CRITICAL)
+        // 7. RESIZE HANDLER
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 8. GSAP INTRO
+        // 8. GSAP INTRO (Cinematic)
         if(typeof gsap !== 'undefined') {
-            gsap.from("h1", { duration: 1.5, y: 50, opacity: 0, ease: "power4.out", delay: 0.2 });
+            gsap.from(".hud-nav", { duration: 1.5, y: -50, opacity: 0, ease: "power4.out" });
+            gsap.from("h1", { duration: 1.5, y: 50, opacity: 0, ease: "power4.out", delay: 0.3 });
             gsap.from(".tagline", { duration: 1, opacity: 0, delay: 0.8 });
             gsap.from(".cta-btn", { duration: 1, y: 20, opacity: 0, delay: 1.2 });
             gsap.from(".card", { duration: 0.8, y: 50, opacity: 0, stagger: 0.1, delay: 1.5 });
         }
+    </script>
+
+    <!-- /// SECURITY: DIGITAL ARMOR PROTOCOL /// -->
+    <script>
+        // 1. DISABLE RIGHT CLICK
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 2. DISABLE KEYBOARD SHORTCUTS
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) { return false; } // F12
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; }
+        }
+
+        // 3. CONSOLE WARNING
+        console.clear();
+        console.log("%c STOP.", "color: red; font-size: 50px; font-weight: bold;");
+        console.log("%c This is a Sovereign Digital Territory.", "color: white; font-size: 20px;");
     </script>
 </body>
 </html>
