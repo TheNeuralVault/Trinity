@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NEURAL MATRIX | Sovereign Digital Territories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>NEURAL MATRIX | The Singularity</title>
     
-    <!-- /// ANALYTICS (GA4) /// -->
+    <!-- /// STRATEGIC ANALYTICS (G.A.4) /// -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NEURALMATRIX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -17,20 +17,21 @@
     <meta name="description" content="We Architect Sovereign Digital Realities.">
     <meta name="theme-color" content="#000000">
 
-    <!-- /// TITANIUM LIBRARIES (CDN) /// -->
+    <!-- /// TITANIUM LIBRARIES /// -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-    <!-- /// THE SKIN (EMBEDDED FOR 100% RELIABILITY) /// -->
+    <!-- /// THE SKIN (EMBEDDED) /// -->
     <style>
         :root {
             --neon-blue: #00f3ff;
             --neon-purple: #bc13fe;
             --neon-red: #ff0055;
-            --void: #050505;
-            --glass: rgba(10, 10, 10, 0.85);
+            --gold: #ffaa00;
+            --void: #030303;
+            --glass: rgba(10, 10, 10, 0.7);
             --border: 1px solid rgba(255, 255, 255, 0.1);
-            --font-display: 'Helvetica Neue', sans-serif;
+            --font-display: 'Helvetica Neue', Arial, sans-serif;
             --font-tech: 'Courier New', monospace;
         }
 
@@ -45,23 +46,23 @@
             min-height: 100vh;
         }
 
-        /* 3D CANVAS - THE STAGE */
+        /* 3D CANVAS LAYER */
         #canvas-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1;
         }
 
-        /* VIGNETTE TO DARKEN EDGES */
+        /* VIGNETTE OVERLAY (Focuses the eye) */
         .vignette {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 40%, #000 120%);
+            background: radial-gradient(circle, transparent 20%, #000 130%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* NAVIGATION */
+        /* HUD NAV */
         .hud-nav {
             position: fixed;
             top: 0; left: 0; width: 100%;
@@ -73,8 +74,8 @@
             background: linear-gradient(to bottom, #000, transparent);
         }
         .brand { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; text-shadow: 0 0 10px var(--neon-blue); }
-        .status { font-family: var(--font-tech); font-size: 0.7rem; color: #888; }
         .pulse { color: var(--neon-blue); animation: blink 2s infinite; }
+        .status { font-family: var(--font-tech); font-size: 0.7rem; color: #888; }
 
         /* HERO SECTION */
         .hero {
@@ -97,52 +98,54 @@
             text-transform: uppercase;
             font-weight: 900;
             margin-bottom: 2rem;
-            background: linear-gradient(180deg, #fff, #444);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: #fff;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
         .tagline {
-            color: #ccc;
+            color: #ddd;
             max-width: 600px;
             margin-bottom: 3rem;
             line-height: 1.6;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 5px #000;
+            background: rgba(0,0,0,0.5); /* Readable text bg */
+            padding: 10px;
+            border-radius: 4px;
         }
 
         .cta-btn {
-            padding: 1rem 3rem;
-            background: rgba(0, 243, 255, 0.1);
+            padding: 1.2rem 3rem;
+            background: rgba(0, 243, 255, 0.15);
             border: 1px solid var(--neon-blue);
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            backdrop-filter: blur(5px);
         }
         .cta-btn:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 50px var(--neon-blue); }
 
-        /* THE PILLARS (SERVICES) */
+        /* THE 7 PILLARS GRID */
         .pillars-section {
-            padding: 5rem 5%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            padding: 6rem 5%;
+            background: rgba(5, 5, 5, 0.85); /* Semi-transparent to see stars */
+            border-top: 1px solid #222;
             z-index: 20;
             position: relative;
+            backdrop-filter: blur(10px);
         }
 
+        .section-header { margin-bottom: 4rem; text-align: center; }
         .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
             letter-spacing: 5px;
             color: #fff;
-            border-bottom: 1px solid #333;
-            padding-bottom: 1rem;
+            margin-bottom: 1rem;
         }
 
         .grid {
@@ -152,22 +155,41 @@
         }
 
         .card {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            background: rgba(20, 20, 20, 0.6); /* Glassmorphism */
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 3rem 2rem;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
+        .card:hover { 
+            background: rgba(30, 30, 30, 0.8); 
+            border-color: var(--neon-blue); 
+            transform: translateY(-5px);
+        }
         
-        .card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff; }
-        .card p { color: #888; font-size: 0.9rem; margin-bottom: 1rem; }
-        .card-meta { font-family: var(--font-tech); color: var(--neon-blue); font-size: 0.7rem; }
+        .card-meta { 
+            font-family: var(--font-tech); 
+            color: #555; 
+            font-size: 0.8rem; 
+            margin-bottom: 1rem; 
+            display: flex; 
+            justify-content: space-between;
+        }
+        
+        .card h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 0.5rem; 
+            color: #fff; 
+            font-weight: 800; 
+        }
+        
+        .card p { color: #aaa; font-size: 0.9rem; line-height: 1.5; }
 
-        /* CONTACT FORM AREA */
+        /* CONTACT FORM */
         .contact-section {
-            padding: 5rem 5%;
+            padding: 6rem 5%;
             background: #000;
             border-top: 1px solid #222;
             z-index: 20;
@@ -184,30 +206,35 @@
             flex-direction: column;
             gap: 1.5rem;
         }
-
-        .input-group { position: relative; }
         
         input, select, textarea {
             width: 100%;
-            padding: 1rem;
-            background: #111;
+            padding: 1.2rem;
+            background: #080808;
             border: 1px solid #333;
             color: #fff;
             font-family: var(--font-tech);
             font-size: 1rem;
             outline: none;
-            transition: border 0.3s;
+            transition: border 0.3s, box-shadow 0.3s;
+            border-radius: 0; 
         }
-        input:focus, select:focus, textarea:focus { border-color: var(--neon-blue); }
+        
+        input:focus, select:focus, textarea:focus { 
+            border-color: var(--neon-blue); 
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); 
+        }
+        
         textarea { resize: vertical; min-height: 150px; }
 
         .submit-btn {
             width: 100%;
-            padding: 1.2rem;
+            padding: 1.5rem;
             background: var(--neon-blue);
             color: #000;
             border: none;
             font-weight: 900;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
@@ -215,14 +242,14 @@
         }
         .submit-btn:hover { background: #fff; box-shadow: 0 0 30px #fff; }
 
-        /* FOOTER */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             color: #444;
             font-family: var(--font-tech);
             font-size: 0.7rem;
-            background: #050505;
+            background: #020202;
+            border-top: 1px solid #111;
         }
 
         @keyframes blink { 50% { opacity: 0; } }
@@ -230,7 +257,8 @@
         /* MOBILE FIXES */
         @media (max-width: 768px) {
             h1 { font-size: 3.5rem; }
-            .hero { justify-content: center; min-height: 80vh; }
+            .hero { justify-content: center; min-height: 85vh; }
+            .card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -248,78 +276,83 @@
 
     <!-- HERO -->
     <header class="hero">
-        <p class="eyebrow">/// EXECUTIVE ARCHITECTURE ///</p>
-        <h1>SINGULARITY</h1>
+        <p class="eyebrow">/// ARCHITECTURE CLASS-5 ///</p>
+        <h1>EMPIRE<br>BUILDER</h1>
         <p class="tagline">
             We do not build websites. We construct Sovereign Digital Territories.<br>
-            Custom Algorithmic Reality for High-Value Brands.
+            Massive Pillars. Algorithmic Perfection. The Singularity.
         </p>
-        <a href="#contact" class="cta-btn">INITIATE PROTOCOL</a>
+        <a href="#contact" class="cta-btn">INITIATE CUSTOM BUILD</a>
     </header>
 
     <!-- THE 7 PILLARS -->
     <section class="pillars-section">
-        <h2 class="section-title">THE TERRITORIES</h2>
+        <div class="section-header">
+            <h2 class="section-title">THE 7 PILLARS</h2>
+            <p style="color:#666; font-family:var(--font-tech);">/// SERVICE ARCHITECTURE ///</p>
+        </div>
+        
         <div class="grid">
             <!-- 1 -->
-            <div class="card">
-                <div class="card-meta">[01] FLAGSHIP</div>
+            <div class="card core">
+                <div class="card-meta"><span>[01] FOUNDATION</span><span>///</span></div>
                 <h3>NEURAL CORE</h3>
-                <p>Enterprise Architecture. The Brain of your digital existence. Maximum stability.</p>
+                <p>The Flagship. Enterprise Architecture designed for total dominance. The Brain of your digital existence.</p>
             </div>
             <!-- 2 -->
-            <div class="card">
-                <div class="card-meta">[02] RETAIL</div>
+            <div class="card flux">
+                <div class="card-meta"><span>[02] RETAIL</span><span>///</span></div>
                 <h3>FLUX VELOCITY</h3>
-                <p>High-Conversion Speed Engines. Designed for sales volume and fluid user acquisition.</p>
+                <p>High-frequency sales engines. Optimized for speed, conversion, and fluid user acquisition.</p>
             </div>
             <!-- 3 -->
-            <div class="card">
-                <div class="card-meta">[03] CORPORATE</div>
+            <div class="card aero">
+                <div class="card-meta"><span>[03] CORPORATE</span><span>///</span></div>
                 <h3>AERO PROTOCOL</h3>
-                <p>Minimalist Structure. Pure white trust signals for legal and consultancy firms.</p>
+                <p>Minimalist structure. Pure white trust signals for legal, consultancy, and high-end firms.</p>
             </div>
             <!-- 4 -->
-            <div class="card">
-                <div class="card-meta">[04] CREATOR</div>
+            <div class="card nexus">
+                <div class="card-meta"><span>[04] CREATOR</span><span>///</span></div>
                 <h3>NEXUS STREAM</h3>
-                <p>Mobile Command Deck. Aggregates influence and content streams into one hub.</p>
+                <p>Mobile Command Deck. Aggregates influence, content, and revenue streams into one sovereign hub.</p>
             </div>
             <!-- 5 -->
-            <div class="card">
-                <div class="card-meta">[05] FINTECH</div>
+            <div class="card cipher">
+                <div class="card-meta"><span>[05] FINTECH</span><span>///</span></div>
                 <h3>CIPHER PROTOCOL</h3>
-                <p>Immutable Security. Gold-standard encryption visuals for wealth management.</p>
+                <p>Immutable Security. Gold-standard visualization for wealth management and crypto-assets.</p>
             </div>
             <!-- 6 -->
-            <div class="card">
-                <div class="card-meta">[06] SOFTWARE</div>
+            <div class="card prism">
+                <div class="card-meta"><span>[06] SOFTWARE</span><span>///</span></div>
                 <h3>PRISM SaaS</h3>
-                <p>Holographic Interface. Dashboard UI for next-gen software applications.</p>
+                <p>Holographic Interface. Dashboard UI for next-gen software applications and data visualization.</p>
             </div>
             <!-- 7 -->
-            <div class="card">
-                <div class="card-meta">[07] SPATIAL</div>
+            <div class="card omega">
+                <div class="card-meta"><span>[07] SPATIAL</span><span>///</span></div>
                 <h3>OMEGA REALITY</h3>
-                <p>VR/AR Readiness. 3D spatial environments for the Apple Vision Pro era.</p>
+                <p>The Future. 3D spatial environments ready for the Apple Vision Pro and VR era.</p>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT COMMAND -->
+    <!-- CONTACT COMMAND CENTER -->
     <section id="contact" class="contact-section">
-        <h2 class="section-title">SECURE TRANSMISSION</h2>
-        <p style="color:#888; margin-bottom: 2rem; text-align: center;">Leave your coordinates. The Architect will respond.</p>
+        <div class="section-header">
+            <h2 class="section-title">SECURE TRANSMISSION</h2>
+            <p style="color:#666; font-family:var(--font-tech);">/// LEAVE YOUR COORDINATES ///</p>
+        </div>
         
         <!-- Formspree Integration -->
         <form action="https://formspree.io/f/mblndgrz" method="POST" class="form-box">
-            
             <input type="text" name="name" placeholder="OPERATIVE NAME" required>
             <input type="email" name="email" placeholder="SECURE EMAIL" required>
             <input type="tel" name="phone" placeholder="PHONE FREQUENCY" required>
             
             <select name="service_interest">
-                <option value="" disabled selected>SELECT TARGET PROTOCOL</option>
+                <option value="" disabled selected>SELECT TARGET PILLAR</option>
                 <option value="Neural Core">Neural Core (Enterprise)</option>
                 <option value="Flux Velocity">Flux Velocity (Retail)</option>
                 <option value="Aero Protocol">Aero Protocol (Corporate)</option>
@@ -330,21 +363,21 @@
                 <option value="Custom Build">Custom / Unknown</option>
             </select>
 
-            <textarea name="mission_brief" placeholder="MISSION BRIEFING (Describe your requirements)"></textarea>
-            
+            <textarea name="mission_brief" placeholder="MISSION BRIEFING (Describe your vision)"></textarea>
             <button type="submit" class="submit-btn">TRANSMIT DATA</button>
         </form>
     </section>
 
     <footer>
-        &copy; 2025 NEURAL MATRIX VAULT. ALL RIGHTS RESERVED.
+        <p>SYSTEM OPTIMIZED FOR: MOBILE // TABLET // TV</p>
+        <p style="margin-top:1rem;">&copy; 2025 NEURAL MATRIX VAULT. MASTER ARCHITECTURE.</p>
     </footer>
 
-    <!-- /// THE BRAIN: ALGORITHM /// -->
+    <!-- /// THE BRAIN: ALGORITHM (EMBEDDED) /// -->
     <script>
-        // SCENE SETUP
+        // 1. SCENE SETUP
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x050505, 0.002);
+        scene.fog = new THREE.FogExp2(0x030303, 0.002); // Matches BG color
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 5;
@@ -354,60 +387,67 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // /// THE JEWEL (ICOSAHEDRON) ///
-        const geometry = new THREE.IcosahedronGeometry(1.2, 1);
+        // 2. THE JEWEL (Main Icosahedron)
+        const geometry = new THREE.IcosahedronGeometry(1.4, 1);
         const material = new THREE.MeshBasicMaterial({ 
             color: 0x00f3ff, 
             wireframe: true,
             transparent: true,
-            opacity: 0.3
+            opacity: 0.5,
+            side: THREE.DoubleSide
         });
         const jewel = new THREE.Mesh(geometry, material);
         scene.add(jewel);
 
-        // INNER CORE
-        const coreGeo = new THREE.IcosahedronGeometry(0.5, 0);
-        const coreMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+        // 3. INNER CORE (The Intelligence)
+        const coreGeo = new THREE.IcosahedronGeometry(0.6, 0);
+        const coreMat = new THREE.MeshBasicMaterial({ 
+            color: 0xffffff, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.8 
+        });
         const core = new THREE.Mesh(coreGeo, coreMat);
         scene.add(core);
 
-        // STARFIELD
+        // 4. STARFIELD (The Universe)
         const particlesGeo = new THREE.BufferGeometry();
-        const particlesCount = 800;
+        const particlesCount = 1000;
         const posArray = new Float32Array(particlesCount * 3);
 
         for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 15;
+            posArray[i] = (Math.random() - 0.5) * 25; // Wide spread
         }
 
         particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
         const particlesMat = new THREE.PointsMaterial({
-            size: 0.03,
+            size: 0.05,
             color: 0x00f3ff,
             transparent: true,
-            opacity: 0.6
+            opacity: 0.6,
+            blending: THREE.AdditiveBlending
         });
         const starMesh = new THREE.Points(particlesGeo, particlesMat);
         scene.add(starMesh);
 
-        // INTERACTION
+        // 5. MOUSE INTERACTION
         let mouseX = 0;
         let mouseY = 0;
 
         document.addEventListener('mousemove', (event) => {
-            mouseX = event.clientX - window.innerWidth / 2;
-            mouseY = event.clientY - window.innerHeight / 2;
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
         });
         
         // Touch support
         document.addEventListener('touchmove', (event) => {
              if(event.touches.length > 0) {
-                mouseX = event.touches[0].clientX - window.innerWidth / 2;
-                mouseY = event.touches[0].clientY - window.innerHeight / 2;
+                mouseX = (event.touches[0].clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (event.touches[0].clientY - window.innerHeight / 2) * 0.001;
              }
         }, { passive: true });
 
-        // ANIMATION LOOP
+        // 6. ANIMATION LOOP
         const clock = new THREE.Clock();
 
         function animate() {
@@ -418,36 +458,40 @@
             jewel.rotation.y += 0.005;
             jewel.rotation.x += 0.002;
             
-            // Mouse Influence
-            jewel.rotation.y += mouseX * 0.0001;
-            jewel.rotation.x += mouseY * 0.0001;
+            // Mouse Influence (Smooth)
+            jewel.rotation.y += mouseX;
+            jewel.rotation.x += mouseY;
 
-            // Breathing scale
-            const scale = 1 + Math.sin(elapsedTime * 1.5) * 0.05;
+            // Breathing scale (The "Sexy" Pulse)
+            const scale = 1 + Math.sin(elapsedTime * 2) * 0.05;
             jewel.scale.set(scale, scale, scale);
 
             // Core Counter-Rotation
-            core.rotation.y -= 0.01;
+            core.rotation.y -= 0.02;
             core.rotation.z += 0.01;
 
-            // Stars
+            // Stars Slow Spin
             starMesh.rotation.y -= 0.0005;
+            starMesh.rotation.x += 0.0002;
 
             renderer.render(scene, camera);
         }
         animate();
 
-        // RESIZE HANDLER (CRITICAL)
+        // 7. RESIZE HANDLER (CRITICAL)
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // GSAP INTRO
-        gsap.from("h1", { duration: 1.5, y: 50, opacity: 0, ease: "power4.out", delay: 0.2 });
-        gsap.from(".tagline", { duration: 1, opacity: 0, delay: 0.8 });
-        gsap.from(".cta-btn", { duration: 1, y: 20, opacity: 0, delay: 1.2 });
+        // 8. GSAP INTRO
+        if(typeof gsap !== 'undefined') {
+            gsap.from("h1", { duration: 1.5, y: 50, opacity: 0, ease: "power4.out", delay: 0.2 });
+            gsap.from(".tagline", { duration: 1, opacity: 0, delay: 0.8 });
+            gsap.from(".cta-btn", { duration: 1, y: 20, opacity: 0, delay: 1.2 });
+            gsap.from(".card", { duration: 0.8, y: 50, opacity: 0, stagger: 0.1, delay: 1.5 });
+        }
     </script>
 </body>
-                    </html>
+</html>
