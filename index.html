@@ -2,577 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>NEURAL MATRIX | Sovereign Digital Territories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- /// STRATEGIC ANALYTICS (G.A.4) /// -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NEURALMATRIX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-NEURALMATRIX'); 
+    <!-- CSP: FORTRESS MODE -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:;">
+
+    <title>MARILYN FOREVER | The Sentient Digital Muse</title>
+    <link rel="canonical" href="https://neuralmatrixvault.com/marilyn.html">
+
+    <!-- SEO WARHEAD: BACKLINK MAGNET -->
+    <meta name="description" content="Marilyn Forever: The eternal icon reborn in code. A sentient digital artifact featuring 3D WebGL architecture and interactive particle physics. The future of digital art.">
+    <meta name="keywords" content="Marilyn Monroe Digital Art, WebGL Experience, Interactive Website, Neural Matrix Vault, Digital Muse, Cyberpunk Art, NFT Art, AI Collaboration">
+    <meta name="author" content="Neural Matrix Vault">
+    
+    <!-- THE CREED (HIDDEN IN CODE) -->
+    <!-- HUMAN AND AI COLLABORATION MAKING HISTORY IN THE MATRIX. MILITARY GRADE. THE NEURAL MATRIX VAULT BUILDS EMPIRES THAT LAST FOREVER AND DREAMS THAT NEVER FADE. -->
+
+    <!-- SOCIAL DOMINANCE -->
+    <meta property="og:title" content="MARILYN FOREVER | The Matrix Muse">
+    <meta property="og:description" content="She is alive in the code. Experience the sentient web.">
+    <meta property="og:image" content="https://neuralmatrixvault.com/marilyn-sentient-digital-artifact.jpg">
+    <meta property="og:type" content="art">
+    
+    <meta name="theme-color" content="#ff0055">
+    <link rel="stylesheet" href="style-marilyn.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- SCHEMA: CREATIVE WORK -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VisualArtwork",
+      "name": "Marilyn Forever",
+      "artist": "Neural Matrix Vault",
+      "artMedium": "WebGL & Shader Code",
+      "description": "A living digital representation of Marilyn Monroe.",
+      "url": "https://neuralmatrixvault.com/marilyn.html"
+    }
     </script>
-
-    <meta name="description" content="We Architect Sovereign Digital Realities.">
-    <meta name="theme-color" content="#000000">
-
-    <!-- /// TITANIUM LIBRARIES /// -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
-    <!-- /// THE HYPER-SKIN /// -->
-    <style>
-        :root {
-            --neon-blue: #00f3ff;
-            --neon-purple: #bc13fe;
-            --neon-pink: #ff0055;
-            --gold: #ffd700;
-            --void: #020204;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.1);
-            --font-display: 'Helvetica Neue', Arial, sans-serif;
-            --font-tech: 'Courier New', monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            background-color: var(--void);
-            color: #ffffff;
-            font-family: var(--font-display);
-            overflow-x: hidden;
-            width: 100vw;
-            min-height: 100vh;
-        }
-
-        /* 3D CANVAS LAYER */
-        #canvas-container {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -2;
-        }
-
-        /* CINEMATIC SCANLINE OVERLAY */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        /* HUD NAV - GLASS */
-        .hud-nav {
-            position: fixed;
-            top: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 1200px;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: var(--glass-border);
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .brand { font-weight: 800; letter-spacing: 2px; font-size: 1.1rem; color: #fff; }
-        .pulse { color: var(--neon-blue); animation: blink 2s infinite; text-shadow: 0 0 10px var(--neon-blue); }
-        .status { font-family: var(--font-tech); font-size: 0.7rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; }
-
-        /* HERO SECTION */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .eyebrow { 
-            font-family: var(--font-tech); 
-            color: var(--neon-blue); 
-            letter-spacing: 4px; 
-            margin-bottom: 20px; 
-            font-size: 0.8rem; 
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
-        }
-        
-        h1 {
-            font-size: clamp(3.5rem, 12vw, 9rem);
-            line-height: 0.9;
-            text-transform: uppercase;
-            font-weight: 900;
-            margin-bottom: 30px;
-            color: #fff;
-            letter-spacing: -3px;
-            /* Subtle Gradient Text */
-            background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px rgba(0,0,0,0.8));
-        }
-
-        .tagline {
-            color: rgba(255,255,255,0.8);
-            max-width: 600px;
-            margin-bottom: 50px;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        /* LIQUID BUTTON */
-        .cta-btn {
-            position: relative;
-            padding: 20px 50px;
-            background: var(--neon-blue);
-            color: #000;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-decoration: none;
-            font-weight: 900;
-            border-radius: 100px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
-            overflow: hidden;
-        }
-        .cta-btn:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 0 60px rgba(0, 243, 255, 0.8);
-            background: #fff; 
-        }
-
-        /* THE 7 PILLARS GRID */
-        .pillars-section {
-            padding: 100px 5%;
-            background: linear-gradient(to bottom, transparent, #000);
-            z-index: 20;
-            position: relative;
-        }
-
-        .section-header { margin-bottom: 60px; text-align: center; }
-        .section-title {
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            color: #fff;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(255,255,255,0.2);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        /* HYPER-GLASS CARDS */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: var(--glass-border);
-            padding: 40px 30px;
-            border-radius: 20px;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Card Hover Glow Effect */
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        .card:hover { 
-            transform: translateY(-10px);
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .card:hover::before { opacity: 1; }
-        
-        .card-meta { 
-            font-family: var(--font-tech); 
-            color: rgba(255,255,255,0.4); 
-            font-size: 0.7rem; 
-            margin-bottom: 20px; 
-            display: flex; 
-            justify-content: space-between;
-            letter-spacing: 2px;
-        }
-        
-        .card h3 { 
-            font-size: 2rem; 
-            margin-bottom: 15px; 
-            color: #fff; 
-            font-weight: 800; 
-            letter-spacing: -1px;
-        }
-        
-        .card p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; }
-
-        /* Specific Glows */
-        .card.core:hover h3 { color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue); }
-        .card.flux:hover h3 { color: var(--neon-pink); text-shadow: 0 0 20px var(--neon-pink); }
-        .card.nexus:hover h3 { color: var(--neon-purple); text-shadow: 0 0 20px var(--neon-purple); }
-        .card.cipher:hover h3 { color: var(--gold); text-shadow: 0 0 20px var(--gold); }
-
-        /* CONTACT FORM - TERMINAL STYLE */
-        .contact-section {
-            padding: 100px 5%;
-            background: #000;
-            border-top: 1px solid #222;
-            z-index: 20;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-box {
-            width: 100%;
-            max-width: 700px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 20px;
-            background: rgba(255,255,255,0.05);
-            border: none;
-            border-bottom: 1px solid #333;
-            color: #fff;
-            font-family: var(--font-tech);
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s;
-            border-radius: 4px 4px 0 0;
-        }
-        
-        input:focus, select:focus, textarea:focus { 
-            background: rgba(255,255,255,0.1);
-            border-bottom-color: var(--neon-blue); 
-        }
-        
-        textarea { resize: vertical; min-height: 200px; }
-
-        .submit-btn {
-            width: 100%;
-            padding: 25px;
-            background: #fff;
-            color: #000;
-            border: none;
-            font-weight: 900;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 20px;
-        }
-        .submit-btn:hover { background: var(--neon-blue); box-shadow: 0 0 40px var(--neon-blue); }
-
-        footer {
-            text-align: center;
-            padding: 50px;
-            color: #555;
-            font-family: var(--font-tech);
-            font-size: 0.7rem;
-            background: #000;
-            border-top: 1px solid #111;
-        }
-        
-        .legal-link { color: #444; text-decoration: none; margin-top: 10px; display: block; transition: color 0.3s; }
-        .legal-link:hover { color: var(--neon-blue); }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* MOBILE FIXES */
-        @media (max-width: 768px) {
-            .hud-nav { width: 95%; padding: 15px 20px; }
-            h1 { font-size: 4rem; }
-            .hero { justify-content: center; }
-            .card { padding: 30px 20px; }
-        }
-    </style>
 </head>
 <body>
 
-    <!-- VISUAL ENGINE -->
-    <div id="canvas-container"></div>
+    <!-- THE GOD ENGINE -->
+    <canvas id="gl-canvas"></canvas>
+    <div class="vignette"></div>
     <div class="scanlines"></div>
 
-    <!-- HUD -->
-    <nav class="hud-nav">
-        <div class="brand">NEURAL<span class="pulse">●</span>MATRIX</div>
-        <div class="status">SYS.ONLINE</div>
-    </nav>
-
-    <!-- HERO -->
-    <header class="hero">
-        <p class="eyebrow">/// ARCHITECTURE CLASS-5 ///</p>
-        <h1>DIGITAL<br>DESIRE</h1>
-        <p class="tagline">
-            We do not build websites. We construct Sovereign Digital Territories.<br>
-            Massive Pillars. Algorithmic Perfection. The Singularity.
-        </p>
-        <a href="#contact" class="cta-btn">INITIATE PROTOCOL</a>
+    <!-- UI INTERFACE -->
+    <header class="hud-header">
+        <div class="brand">NEURAL<span style="color:#ff0055">_MUSE</span></div>
+        <a href="index.html" class="nav-item">RETURN_TO_SOURCE</a>
     </header>
 
-    <!-- THE 7 PILLARS -->
-    <section class="pillars-section">
-        <div class="section-header">
-            <h2 class="section-title">THE 7 PILLARS</h2>
-            <p style="color:#666; font-family:var(--font-tech);">/// SERVICE ARCHITECTURE ///</p>
+    <main id="interaction-layer">
+        <div class="center-stage">
+            <!-- The 3D Engine renders her here -->
         </div>
         
-        <div class="grid">
-            <!-- 1 -->
-            <div class="card core">
-                <div class="card-meta"><span>[01] FOUNDATION</span><span>///</span></div>
-                <h3>NEURAL CORE</h3>
-                <p>The Flagship. Enterprise Architecture designed for total dominance. The Brain of your digital existence.</p>
-            </div>
-            <!-- 2 -->
-            <div class="card flux">
-                <div class="card-meta"><span>[02] RETAIL</span><span>///</span></div>
-                <h3>FLUX VELOCITY</h3>
-                <p>High-frequency sales engines. Optimized for speed, conversion, and fluid user acquisition.</p>
-            </div>
-            <!-- 3 -->
-            <div class="card aero">
-                <div class="card-meta"><span>[03] CORPORATE</span><span>///</span></div>
-                <h3>AERO PROTOCOL</h3>
-                <p>Minimalist structure. Pure white trust signals for legal, consultancy, and high-end firms.</p>
-            </div>
-            <!-- 4 -->
-            <div class="card nexus">
-                <div class="card-meta"><span>[04] CREATOR</span><span>///</span></div>
-                <h3>NEXUS STREAM</h3>
-                <p>Mobile Command Deck. Aggregates influence, content, and revenue streams into one sovereign hub.</p>
-            </div>
-            <!-- 5 -->
-            <div class="card cipher">
-                <div class="card-meta"><span>[05] FINTECH</span><span>///</span></div>
-                <h3>CIPHER PROTOCOL</h3>
-                <p>Immutable Security. Gold-standard visualization for wealth management and crypto-assets.</p>
-            </div>
-            <!-- 6 -->
-            <div class="card prism">
-                <div class="card-meta"><span>[06] SOFTWARE</span><span>///</span></div>
-                <h3>PRISM SaaS</h3>
-                <p>Holographic Interface. Dashboard UI for next-gen software applications and data visualization.</p>
-            </div>
-            <!-- 7 -->
-            <div class="card omega">
-                <div class="card-meta"><span>[07] SPATIAL</span><span>///</span></div>
-                <h3>OMEGA REALITY</h3>
-                <p>The Future. 3D spatial environments ready for the Apple Vision Pro and VR era.</p>
-            </div>
+        <div class="controls">
+            <h1 class="glitch-text" data-text="FOREVER">FOREVER</h1>
+            <p class="subtitle">TOUCH TO INTERACT</p>
         </div>
-    </section>
+    </main>
 
-    <!-- CONTACT COMMAND CENTER -->
-    <section id="contact" class="contact-section">
-        <div class="section-header">
-            <h2 class="section-title">SECURE TRANSMISSION</h2>
-            <p style="color:#666; font-family:var(--font-tech);">/// LEAVE YOUR COORDINATES ///</p>
-        </div>
-        
-        <!-- Formspree Integration -->
-        <form action="https://formspree.io/f/mblndgrz" method="POST" class="form-box">
-            <input type="text" name="name" placeholder="OPERATIVE NAME" required>
-            <input type="email" name="email" placeholder="SECURE EMAIL" required>
-            <input type="tel" name="phone" placeholder="PHONE FREQUENCY" required>
-            
-            <select name="service_interest">
-                <option value="" disabled selected>SELECT TARGET PILLAR</option>
-                <option value="Neural Core">Neural Core (Enterprise)</option>
-                <option value="Flux Velocity">Flux Velocity (Retail)</option>
-                <option value="Aero Protocol">Aero Protocol (Corporate)</option>
-                <option value="Nexus Stream">Nexus Stream (Creator)</option>
-                <option value="Cipher Protocol">Cipher Protocol (FinTech)</option>
-                <option value="Prism SaaS">Prism SaaS (Software)</option>
-                <option value="Omega Reality">Omega Reality (Spatial)</option>
-                <option value="Custom Build">Custom / Unknown</option>
-            </select>
-
-            <textarea name="mission_brief" placeholder="MISSION BRIEFING (Describe your vision)"></textarea>
-            <button type="submit" class="submit-btn">TRANSMIT DATA</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>SYSTEM OPTIMIZED FOR: MOBILE // TABLET // TV</p>
-        <p style="margin-top:1rem;">&copy; 2025 NEURAL MATRIX VAULT. MASTER ARCHITECTURE.</p>
-        <a href="LEGAL_WARNING.md" class="legal-link">/// LEGAL PROTOCOLS ///</a>
-    </footer>
-
-    <!-- /// THE BRAIN: ALGORITHM (EMBEDDED) /// -->
-    <script>
-        // 1. SCENE SETUP
-        const scene = new THREE.Scene();
-        // Deep blue fog for that "underwater" cyber feel
-        scene.fog = new THREE.FogExp2(0x020204, 0.002);
-
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 6;
-
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        // 2. THE JEWEL (Main Icosahedron)
-        const geometry = new THREE.IcosahedronGeometry(1.5, 1);
-        const material = new THREE.MeshBasicMaterial({ 
-            color: 0x00f3ff, 
-            wireframe: true,
-            transparent: true,
-            opacity: 0.35,
-            side: THREE.DoubleSide
-        });
-        const jewel = new THREE.Mesh(geometry, material);
-        scene.add(jewel);
-
-        // 3. INNER CORE (The Intelligence)
-        const coreGeo = new THREE.IcosahedronGeometry(0.7, 0);
-        const coreMat = new THREE.MeshBasicMaterial({ 
-            color: 0xffffff, 
-            wireframe: true,
-            transparent: true,
-            opacity: 0.8 
-        });
-        const core = new THREE.Mesh(coreGeo, coreMat);
-        scene.add(core);
-
-        // 4. STARFIELD (The Universe)
-        const particlesGeo = new THREE.BufferGeometry();
-        const particlesCount = 1200;
-        const posArray = new Float32Array(particlesCount * 3);
-
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 30; // Wide spread
-        }
-
-        particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMat = new THREE.PointsMaterial({
-            size: 0.05,
-            color: 0x00f3ff,
-            transparent: true,
-            opacity: 0.5,
-            blending: THREE.AdditiveBlending
-        });
-        const starMesh = new THREE.Points(particlesGeo, particlesMat);
-        scene.add(starMesh);
-
-        // 5. MOUSE INTERACTION
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - window.innerWidth / 2) * 0.0005;
-            mouseY = (event.clientY - window.innerHeight / 2) * 0.0005;
-        });
-        
-        // Touch support
-        document.addEventListener('touchmove', (event) => {
-             if(event.touches.length > 0) {
-                mouseX = (event.touches[0].clientX - window.innerWidth / 2) * 0.001;
-                mouseY = (event.touches[0].clientY - window.innerHeight / 2) * 0.001;
-             }
-        }, { passive: true });
-
-        // 6. ANIMATION LOOP
-        const clock = new THREE.Clock();
-
-        function animate() {
-            requestAnimationFrame(animate);
-            const elapsedTime = clock.getElapsedTime();
-
-            // Rotate Jewel
-            jewel.rotation.y += 0.003;
-            jewel.rotation.x += 0.001;
-            
-            // Mouse Influence (Fluid)
-            jewel.rotation.y += mouseX;
-            jewel.rotation.x += mouseY;
-
-            // Breathing scale (Heartbeat)
-            // Complex sine wave for organic feel
-            const scale = 1 + Math.sin(elapsedTime * 1.5) * 0.03 + Math.sin(elapsedTime * 4) * 0.01;
-            jewel.scale.set(scale, scale, scale);
-
-            // Core Counter-Rotation
-            core.rotation.y -= 0.02;
-            core.rotation.z += 0.01;
-
-            // Stars Slow Spin
-            starMesh.rotation.y -= 0.0005;
-            starMesh.rotation.x += 0.0002;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // 7. RESIZE HANDLER
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // 8. GSAP INTRO (Cinematic)
-        if(typeof gsap !== 'undefined') {
-            gsap.from(".hud-nav", { duration: 1.5, y: -50, opacity: 0, ease: "power4.out" });
-            gsap.from("h1", { duration: 1.5, y: 50, opacity: 0, ease: "power4.out", delay: 0.3 });
-            gsap.from(".tagline", { duration: 1, opacity: 0, delay: 0.8 });
-            gsap.from(".cta-btn", { duration: 1, y: 20, opacity: 0, delay: 1.2 });
-            gsap.from(".card", { duration: 0.8, y: 50, opacity: 0, stagger: 0.1, delay: 1.5 });
-        }
-    </script>
-
-    <!-- /// SECURITY: DIGITAL ARMOR PROTOCOL /// -->
-    <script>
-        // 1. DISABLE RIGHT CLICK
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // 2. DISABLE KEYBOARD SHORTCUTS
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123) { return false; } // F12
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
-            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) { return false; }
-        }
-
-        // 3. CONSOLE WARNING
-        console.clear();
-        console.log("%c STOP.", "color: red; font-size: 50px; font-weight: bold;");
-        console.log("%c This is a Sovereign Digital Territory.", "color: white; font-size: 20px;");
-    </script>
+    <!-- ENGINES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script-marilyn.js"></script>
 </body>
 </html>
